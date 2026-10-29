@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0d14">
+  <meta name="description" content="Youth calisthenics & six-pack workout app for 13yo athletes using only a pull-up bar">
+  
+  <!-- Apple iOS Mobile Web App Settings for Native Look -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Titan Core">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+  
+  <title>TITAN CORE - 13yo Calisthenics & Six-Pack Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icon-192.png">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <div class="brand-wrapper">
+          <div class="brand-logo">⚡</div>
+          <div class="brand-text">
+            <h1>TITAN CORE</h1>
+            <p class="brand-sub">Youth Calisthenics & Six-Pack Plan</p>
+          </div>
+        </div>
+
+        <!-- Multi-User Athlete Profile Switcher Button -->
+        <button class="profile-switch-btn" id="btn-open-profile-modal" title="Switch or Add Athlete Profile">
+          <span class="profile-avatar" id="header-profile-avatar">⚡</span>
+          <div class="profile-text-wrap">
+            <span class="profile-label">ATHLETE</span>
+            <span class="profile-name" id="header-profile-name">Athlete 1 (13yo)</span>
+          </div>
+          <span class="profile-arrow">▼</span>
+        </button>
+      </div>
+
+      <div class="header-right">
+        <div class="header-stats">
+          <div class="stat-pill streak" title="Current Daily Streak">
+            <span class="icon">🔥</span>
+            <span id="header-streak-count">0 Day Streak</span>
+          </div>
+          <div class="stat-pill rank" title="Your Athlete Rank">
+            <span class="icon" id="header-rank-badge">🌱</span>
+            <span id="header-rank-title">Iron Recruit</span>
+          </div>
+          <div class="stat-pill xp" title="Total Experience Points">
+            <span class="icon">⭐</span>
+            <span id="header-xp-val">0 XP</span>
+          </div>
+        </div>
+
+        <!-- Quick Share to iPhone / iPad Button -->
+        <button class="btn btn-secondary btn-sm btn-share-header" id="btn-open-share-modal" title="Open on iPhone, iPad, or Publish">
+          📲 Mobile / Publish
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-content-wrap">
+
+    <!-- Notification / Daily Workout Reminder Banner -->
+    <div class="reminder-banner" id="reminder-top-banner">
+      <div class="reminder-content">
+        <div class="bell-icon">🔔</div>
+        <div>
+          <div class="reminder-title" id="reminder-banner-text">Ready to crush today's workout?</div>
+          <div class="reminder-subtitle" id="reminder-banner-sub">Ideal teen workout time: 4:30 PM (after school)</div>
+        </div>
+      </div>
+      <div class="reminder-actions">
+        <button class="btn btn-secondary btn-sm" id="btn-toggle-notification-perm">
+          🔔 Push Alerts
+        </button>
+        <button class="btn btn-primary btn-sm" id="btn-quick-start-today">
+          ⚡ Start Workout
+        </button>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs (Desktop & iPad) -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="tab-btn active" data-tab="tab-daily-workout">
+        📅 Daily Plan
+      </button>
+      <button class="tab-btn" data-tab="tab-progress">
+        📊 Visual Progress Plan
+      </button>
+      <button class="tab-btn" data-tab="tab-habits">
+        ✅ Habit Tracker & Reminders
+      </button>
+      <button class="tab-btn" data-tab="tab-anatomy">
+        🧬 Muscle Map & Exercises
+      </button>
+      <button class="tab-btn" data-tab="tab-guide">
+        🛡️ Teen Safety & Growth
+      </button>
+    </nav>
+
+    <!-- ========================================================
+         TAB 1: DAILY WORKOUT PLAN
+         ======================================================== -->
+    <section class="tab-view active" id="tab-daily-workout">
+      <!-- 7-Day Week Selector (Touch swipeable on mobile) -->
+      <div class="day-selector-scroll-wrap">
+        <div class="day-selector-grid" id="day-selector-container">
+          <!-- Rendered by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Workout Summary Hero Card -->
+      <div class="workout-hero-card" id="day-hero-card">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Coach advice for 13yo -->
+      <div class="teen-coach-card">
+        <div class="coach-icon">💡</div>
+        <div>
+          <div class="coach-title">Teen Coach Tip of the Day</div>
+          <div class="coach-text" id="day-coach-tip">
+            Loading teen advice...
+          </div>
+        </div>
+      </div>
+
+      <!-- Warmup Section -->
+      <div class="warmup-box" id="day-warmup-box">
+        <div class="section-label">🔥 3-Minute Injury Prevention Warm-Up</div>
+        <div class="warmup-chips" id="day-warmup-chips">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Exercises of the Day -->
+      <div class="section-label">📋 Today's Exercise Breakdown (Pull-up Bar & Floor)</div>
+      <div class="exercise-cards-list" id="day-exercises-container">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 2: VISUAL PROGRESS PLAN
+         ======================================================== -->
+    <section class="tab-view" id="tab-progress">
+      <div class="progress-stats-grid">
+        <div class="stat-metric-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value" id="prog-streak-val">0</div>
+          <div class="stat-title">Day Streak</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-value" id="prog-completed-workouts">0</div>
+          <div class="stat-title">Workouts Finished</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-value" id="prog-max-pullups">0</div>
+          <div class="stat-title">Max Pull-Up PR</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-value" id="prog-max-plank">0s</div>
+          <div class="stat-title">Max Plank Hold PR</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-icon">🧗</div>
+          <div class="stat-value" id="prog-max-hang">0s</div>
+          <div class="stat-title">Dead Hang PR</div>
+        </div>
+      </div>
+
+      <!-- Athlete Rank Progression Tree -->
+      <div class="rank-tree-card">
+        <div class="section-label">🎖️ Athlete Rank Roadmap (<span id="rank-athlete-name-label">Athlete 1</span>)</div>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">
+          Earn XP by finishing workouts (+50 XP) and checking off daily healthy habits (+10 XP each). Level up your rank from Iron Recruit to Apex Titan!
+        </p>
+        
+        <!-- Progress bar toward next rank -->
+        <div style="background: var(--bg-secondary); border-radius: var(--radius-full); height: 10px; overflow: hidden; margin-bottom: 8px;">
+          <div id="rank-progress-bar" style="background: var(--gradient-brand); height: 100%; width: 20%; transition: width 0.5s ease;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-bottom: 16px;">
+          <span id="rank-current-xp-label">0 XP</span>
+          <span id="rank-next-xp-label">Next Rank: 150 XP</span>
+        </div>
+
+        <div class="rank-steps-list" id="rank-steps-container">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- PR Record Logger Form -->
+      <div class="pr-logger-box">
+        <div class="section-label">📈 Log Personal Records (PRs)</div>
+        <p style="font-size: 13px; color: var(--text-secondary);">
+          Test your strength once a week on Saturday or Sunday. Watch your numbers climb as your back widens and your core hardens!
+        </p>
+
+        <form id="pr-form" class="pr-inputs-grid">
+          <div class="pr-input-card">
+            <label>Max Strict Pull-Ups / Negatives</label>
+            <div class="pr-input-wrapper">
+              <input type="number" id="input-pr-pullups" class="pr-input-field" min="0" max="100" placeholder="e.g. 5">
+              <span class="pr-unit">reps</span>
+            </div>
+          </div>
+
+          <div class="pr-input-card">
+            <label>Max Plank Hold Time</label>
+            <div class="pr-input-wrapper">
+              <input type="number" id="input-pr-plank" class="pr-input-field" min="0" max="600" placeholder="e.g. 45">
+              <span class="pr-unit">seconds</span>
+            </div>
+          </div>
+
+          <div class="pr-input-card">
+            <label>Max Dead Hang Time</label>
+            <div class="pr-input-wrapper">
+              <input type="number" id="input-pr-hang" class="pr-input-field" min="0" max="600" placeholder="e.g. 40">
+              <span class="pr-unit">seconds</span>
+            </div>
+          </div>
+
+          <div class="pr-input-card" style="display: flex; align-items: flex-end;">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              💾 Save Records (+25 XP)
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Backup and Reset Options -->
+      <div class="progress-actions-row">
+        <button class="btn btn-secondary btn-sm" id="btn-export-data">📥 Backup All Profiles (JSON)</button>
+        <button class="btn btn-secondary btn-sm" id="btn-reset-demo" style="color: var(--accent-red);">⚠️ Reset Current Profile</button>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 3: HABIT TRACKER & REMINDERS
+         ======================================================== -->
+    <section class="tab-view" id="tab-habits">
+      <!-- Reminder Configuration Box -->
+      <div class="reminder-panel">
+        <div class="reminder-panel-header">
+          <div>
+            <div class="section-label" style="margin: 0 0 4px 0;">⏰ Daily Workout Reminder Setup</div>
+            <div style="font-size: 13px; color: var(--text-secondary);">
+              Set an alert so you never miss training right after school. Consistency is 90% of building a six pack!
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-test-sound">
+            🔊 Test Audio Chime
+          </button>
+        </div>
+
+        <div class="reminder-form">
+          <div class="time-input-group">
+            <label for="reminder-time-input">Reminder Time:</label>
+            <input type="time" id="reminder-time-input" class="time-input" value="16:30">
+          </div>
+          <button class="btn btn-primary btn-sm" id="btn-save-reminder">
+            Save Reminder Time
+          </button>
+          <span id="reminder-status-badge" style="font-size: 12px; color: var(--accent-green);">
+            Active for 16:30 Daily
+          </span>
+        </div>
+      </div>
+
+      <!-- Today's Habit Checklist -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+        <div class="section-label" style="margin: 0;">🎯 Today's Athlete Habits (<span id="habit-score-label">0/5 Done</span>)</div>
+        <div style="font-size: 12px; color: var(--accent-cyan); font-weight: 600;" id="today-date-display">Today</div>
+      </div>
+
+      <div class="habits-grid" id="habits-cards-container">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 4: INTERACTIVE MUSCLE MAP & EXERCISE LIBRARY
+         ======================================================== -->
+    <section class="tab-view" id="tab-anatomy">
+      <div class="anatomy-layout">
+        <!-- Interactive Anatomy Body Map -->
+        <div class="anatomy-viewer-card">
+          <div class="section-label">Interactive Muscle Map</div>
+          <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 12px;">
+            Touch or click any muscle group on the athletic figure to view exercises targeting it!
+          </p>
+
+          <div class="anatomy-svg-wrapper">
+            <svg viewBox="0 0 200 400" width="100%" height="auto" id="anatomy-svg">
+              <!-- Head & Neck -->
+              <circle cx="100" cy="35" r="20" fill="#243048" stroke="#33425e" stroke-width="1.5" />
+              <rect x="94" y="55" width="12" height="15" fill="#243048" />
+
+              <!-- Traps / Upper Back -->
+              <path class="muscle-path" data-muscle="upper_back" d="M 85 62 L 100 70 L 115 62 L 135 78 L 125 90 L 75 90 L 65 78 Z" />
+
+              <!-- Shoulders (Deltoids) -->
+              <path class="muscle-path" data-muscle="shoulders" d="M 60 80 Q 50 95 55 115 L 68 105 L 72 85 Z" />
+              <path class="muscle-path" data-muscle="shoulders" d="M 140 80 Q 150 95 145 115 L 132 105 L 128 85 Z" />
+
+              <!-- Chest (Pectorals) -->
+              <path class="muscle-path" data-muscle="chest" d="M 75 92 Q 100 95 100 115 Q 100 128 72 126 Q 68 105 75 92 Z" />
+              <path class="muscle-path" data-muscle="chest" d="M 125 92 Q 100 95 100 115 Q 100 128 128 126 Q 132 105 125 92 Z" />
+
+              <!-- Latissimus Dorsi (Lats / Back Wings) -->
+              <path class="muscle-path" data-muscle="lats" d="M 68 126 Q 62 155 70 175 L 76 150 L 72 126 Z" />
+              <path class="muscle-path" data-muscle="lats" d="M 132 126 Q 138 155 130 175 L 124 150 L 128 126 Z" />
+
+              <!-- Biceps & Forearms -->
+              <path class="muscle-path" data-muscle="biceps" d="M 54 116 Q 48 135 52 155 L 62 150 L 65 118 Z" />
+              <path class="muscle-path" data-muscle="biceps" d="M 146 116 Q 152 135 148 155 L 138 150 L 135 118 Z" />
+
+              <path class="muscle-path" data-muscle="forearms" d="M 50 158 Q 42 195 46 220 L 56 215 L 60 160 Z" />
+              <path class="muscle-path" data-muscle="forearms" d="M 150 158 Q 158 195 154 220 L 144 215 L 140 160 Z" />
+
+              <!-- Rectus Abdominis (Six-Pack Upper) -->
+              <rect class="muscle-path" data-muscle="abs" x="80" y="130" width="18" height="15" rx="3" />
+              <rect class="muscle-path" data-muscle="abs" x="102" y="130" width="18" height="15" rx="3" />
+              <rect class="muscle-path" data-muscle="abs" x="80" y="148" width="18" height="15" rx="3" />
+              <rect class="muscle-path" data-muscle="abs" x="102" y="148" width="18" height="15" rx="3" />
+
+              <!-- Rectus Abdominis (Lower 6-Pack & Transverse) -->
+              <rect class="muscle-path" data-muscle="lower_abs" x="82" y="166" width="16" height="18" rx="3" />
+              <rect class="muscle-path" data-muscle="lower_abs" x="102" y="166" width="16" height="18" rx="3" />
+
+              <!-- Obliques (Side Flanks) -->
+              <path class="muscle-path" data-muscle="obliques" d="M 72 132 L 79 132 L 80 185 L 74 180 Z" />
+              <path class="muscle-path" data-muscle="obliques" d="M 128 132 L 121 132 L 120 185 L 126 180 Z" />
+
+              <!-- Pelvis / Hip Flexors -->
+              <path class="muscle-path" data-muscle="core" d="M 74 185 L 100 195 L 126 185 L 115 210 L 85 210 Z" />
+
+              <!-- Quadriceps & Legs -->
+              <path class="muscle-path" data-muscle="legs" d="M 78 212 Q 68 260 74 310 L 94 310 Q 98 260 92 212 Z" />
+              <path class="muscle-path" data-muscle="legs" d="M 122 212 Q 132 260 126 310 L 106 310 Q 102 260 108 212 Z" />
+
+              <!-- Calves -->
+              <path class="muscle-path" data-muscle="legs" d="M 74 315 Q 68 350 78 385 L 90 385 Q 94 350 92 315 Z" />
+              <path class="muscle-path" data-muscle="legs" d="M 126 315 Q 132 350 122 385 L 110 385 Q 106 350 108 315 Z" />
+            </svg>
+          </div>
+
+          <div class="anatomy-legend">
+            <div class="legend-item">
+              <span class="legend-dot green"></span> Primary Target
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot cyan"></span> Secondary Assist
+            </div>
+          </div>
+        </div>
+
+        <!-- Exercise filtered list for selected muscle -->
+        <div class="filter-info-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+            <div class="section-label" style="margin: 0;" id="anatomy-filter-title">
+              All Calisthenics Exercises (14)
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-reset-muscle-filter">
+              Show All
+            </button>
+          </div>
+
+          <div class="exercise-cards-list" id="anatomy-exercise-list">
+            <!-- Filtered exercises rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         TAB 5: TEEN ATHLETE GUIDE & SAFETY
+         ======================================================== -->
+    <section class="tab-view" id="tab-guide">
+      <div class="guide-cards-grid">
+        <div class="guide-card">
+          <div class="guide-card-icon">🦴</div>
+          <h3>Growth Plates & Spine Safety</h3>
+          <p>
+            At 13 years old, your long bones and spinal column are going through rapid growth spurts. Calisthenics (bodyweight training) and pull-up bar hangs are the safest and most effective way to build muscle without joint damage.
+          </p>
+          <ul>
+            <li><strong>Always do Dead Hangs:</strong> Gravity decompresses your spine and helps you grow tall with good posture.</li>
+            <li><strong>No Heavy Barbells Needed:</strong> Your own bodyweight provides more than enough resistance to build athletic power and abs.</li>
+            <li><strong>Never Train to Injury:</strong> Stop a set when your form starts swinging or arching. Perfect reps build muscle faster!</li>
+          </ul>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-icon">🥩</div>
+          <h3>How 13-Year-Olds Get Visible Abs</h3>
+          <p>
+            "Abs are revealed in the kitchen, but built on the bar." A teenager should <strong>NEVER</strong> starve or do extreme crash diets! You need calories to grow taller and build muscle.
+          </p>
+          <ul>
+            <li><strong>Eat Real Protein:</strong> Have eggs at breakfast, milk, chicken breast, fish, beans, and Greek yogurt. Protein repairs the muscle fibers torn during workouts.</li>
+            <li><strong>Cut Liquid Sugar:</strong> The easiest way to burn belly fat is cutting soda, energy drinks, and sugary juices. Drink cold water instead!</li>
+            <li><strong>Fuel Your Brain & Body:</strong> Oats, rice, potatoes, and bananas give you the energy to blast out pull-ups.</li>
+          </ul>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-icon">💤</div>
+          <h3>Sleep: The Secret Muscle Multiplier</h3>
+          <p>
+            You don't build muscle while working out—workouts create micro-tears in the muscle. Your body only repairs them thicker and stronger during deep <strong>Stage 4 Slow-Wave Sleep</strong>.
+          </p>
+          <ul>
+            <li><strong>Aim for 8 to 9 Hours:</strong> Natural Human Growth Hormone (HGH) releases in large surges during deep teen sleep.</li>
+            <li><strong>Screen Curfew:</strong> Put your phone away 30 minutes before sleep so blue light doesn't suppress your melatonin.</li>
+            <li><strong>Consistent Bedtime:</strong> Going to bed around the same time keeps your hormones optimized.</li>
+          </ul>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-icon">🧗</div>
+          <h3>Can't Do a Pull-Up Yet? Here's the Code</h3>
+          <p>
+            Almost every beginner starts with zero pull-ups. Don't worry—follow this simple progression and you will hit 5-10 strict pull-ups in no time:
+          </p>
+          <ul>
+            <li><strong>Step 1: Dead Hangs:</strong> Build up to 45 seconds of continuous active hang to strengthen your grip.</li>
+            <li><strong>Step 2: Scapular Pulls:</strong> Hang with straight arms and shrug your shoulder blades down without bending elbows.</li>
+            <li><strong>Step 3: Negative Pull-Ups:</strong> Use a chair to jump to the top, then lower yourself down as slow as possible (5 full seconds!). Negatives build pure strength.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       MOBILE BOTTOM NAVIGATION BAR (iPhone / Mobile Ergonomics)
+       ======================================================== -->
+  <nav class="mobile-bottom-nav">
+    <button class="mobile-nav-btn active" data-tab="tab-daily-workout">
+      <span class="m-icon">📅</span>
+      <span class="m-label">Plan</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-progress">
+      <span class="m-icon">📊</span>
+      <span class="m-label">Progress</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-habits">
+      <span class="m-icon">✅</span>
+      <span class="m-label">Habits</span>
+    </button>
+    <button class="mobile-nav-btn" data-tab="tab-anatomy">
+      <span class="m-icon">🧬</span>
+      <span class="m-label">Muscles</span>
+    </button>
+    <button class="mobile-nav-btn" id="btn-mobile-nav-profile">
+      <span class="m-icon" id="mobile-profile-avatar">⚡</span>
+      <span class="m-label">Athletes</span>
+    </button>
+  </nav>
+
+  <!-- ========================================================
+       MODAL 1: INTERACTIVE WORKOUT MODE PLAYER
+       ======================================================== -->
+  <div class="modal-overlay" id="workout-modal">
+    <div class="workout-player-modal">
+      <button class="close-modal-btn" id="btn-close-modal" title="Exit Workout">✕</button>
+
+      <div class="player-header">
+        <span class="player-status-tag exercise" id="player-status-badge">EXERCISE 1 OF 5</span>
+        <h2 class="player-exercise-name" id="player-title">Dead Hang</h2>
+        <div class="player-set-info" id="player-set-label">Set 1 of 3 • Target: 30 seconds</div>
+      </div>
+
+      <!-- Circular Countdown / Rep Display -->
+      <div class="timer-container">
+        <svg class="timer-svg" viewBox="0 0 200 200">
+          <circle class="timer-circle-bg" cx="100" cy="100" r="90" />
+          <circle class="timer-circle-progress" id="timer-progress-ring" cx="100" cy="100" r="90" />
+        </svg>
+
+        <div class="timer-text-overlay">
+          <div class="timer-seconds" id="player-timer-digits">30</div>
+          <div class="timer-label" id="player-timer-sublabel">SECONDS</div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="player-controls">
+        <button class="btn btn-secondary player-ctrl-btn" id="btn-player-prev">⏮️ Prev</button>
+        <button class="btn btn-primary player-ctrl-btn" id="btn-player-toggle" style="min-width: 140px;">⏸️ Pause</button>
+        <button class="btn btn-secondary player-ctrl-btn" id="btn-player-next">Next ⏭️</button>
+      </div>
+
+      <!-- Live cues & why -->
+      <div class="player-cues-card">
+        <h4 id="player-cue-header">🎯 Target Muscles & Form Cue</h4>
+        <p id="player-cue-text">Keep your core tight like a hollow banana and breathe steadily.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 2: MULTI-USER ATHLETE PROFILES
+       ======================================================== -->
+  <div class="modal-overlay" id="profile-modal">
+    <div class="profile-modal-content">
+      <button class="close-modal-btn" id="btn-close-profile-modal" title="Close">✕</button>
+      
+      <div class="profile-modal-header">
+        <h2>👥 Athlete Profiles</h2>
+        <p>Multiple users can track their workouts, streaks, habits, and PRs independently on the same device.</p>
+      </div>
+
+      <!-- Profiles List -->
+      <div class="profiles-list-container" id="profiles-list-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Create New Athlete Form -->
+      <div class="new-profile-card">
+        <h3>➕ Add New Athlete</h3>
+        <form id="create-profile-form">
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label for="new-profile-name">Athlete Name:</label>
+              <input type="text" id="new-profile-name" class="form-input" placeholder="e.g. Adam, Leo, Dad" required maxlength="20">
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="new-profile-age">Age:</label>
+              <input type="number" id="new-profile-age" class="form-input" value="13" min="6" max="99" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Choose Avatar Icon:</label>
+            <div class="avatar-picker-grid" id="avatar-picker-grid">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+            Create & Switch to Profile
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 3: SHARE ON IPHONE / IPAD & PUBLISH ONLINE
+       ======================================================== -->
+  <div class="modal-overlay" id="share-modal">
+    <div class="share-modal-content">
+      <button class="close-modal-btn" id="btn-close-share-modal" title="Close">✕</button>
+
+      <div class="share-modal-header">
+        <h2>📲 Open on iPhone, iPad or Publish</h2>
+        <p>Use Titan Core on your mobile devices or publish it online for free.</p>
+      </div>
+
+      <div class="share-tabs-nav">
+        <button class="share-tab-btn active" data-share-tab="share-local-wifi">
+          📱 Home Wi-Fi & QR
+        </button>
+        <button class="share-tab-btn" data-share-tab="share-ios-install">
+          🍏 iPhone / iPad App
+        </button>
+        <button class="share-tab-btn" data-share-tab="share-publish-cloud">
+          🌐 Free Cloud Publish
+        </button>
+      </div>
+
+      <!-- Share Tab 1: Local Wi-Fi & QR Code -->
+      <div class="share-tab-content active" id="share-local-wifi">
+        <div class="qr-display-box">
+          <div class="qr-code-wrapper" id="wifi-qr-container">
+            <!-- QR Code SVG rendered by JS -->
+          </div>
+          <div class="qr-info-text">
+            <p style="font-weight: 700; color: #fff; margin-bottom: 4px;">Point iPhone / iPad Camera Here</p>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+              Scan the QR code to open the app instantly on your phone or tablet on the same Wi-Fi.
+            </p>
+            <div class="copy-url-bar">
+              <input type="text" id="share-wifi-url" readonly class="share-url-input" value="http://192.168.68.66:8080">
+              <button class="btn btn-primary btn-sm" id="btn-copy-url">📋 Copy Link</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Tab 2: How to install as Native iOS App -->
+      <div class="share-tab-content" id="share-ios-install">
+        <div class="ios-install-steps">
+          <div class="install-step">
+            <div class="step-num">1</div>
+            <div>
+              <strong>Open in Safari:</strong>
+              <p>Navigate to the URL on your iPhone or iPad using the Safari browser.</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">2</div>
+            <div>
+              <strong>Tap the Share Button:</strong>
+              <p>Look at the bottom of Safari and tap the square icon with an arrow pointing up 📤.</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">3</div>
+            <div>
+              <strong>Tap "Add to Home Screen":</strong>
+              <p>Scroll down the list of options and tap <strong>"Add to Home Screen"</strong> (➕).</p>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="step-num">4</div>
+            <div>
+              <strong>Enjoy Fullscreen Native Feel:</strong>
+              <p>Titan Core will now appear on your home screen with its custom app icon, running in full screen without the browser URL bar!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Tab 3: Publish Online Forever -->
+      <div class="share-tab-content" id="share-publish-cloud">
+        <div class="publish-cards">
+          <div class="publish-card">
+            <h4>🌟 Option A: GitHub Pages (100% Free & Automatic)</h4>
+            <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">
+              Host it publicly under your own GitHub account:
+            </p>
+            <pre class="code-snippet"><code>cd /Users/y.morsy/.gemini/antigravity/scratch/teen-core-strength-app
+git init
+git add .
+git commit -m "Launch Titan Core"
+git branch -M main
+# Link to your github repo:
+git remote add origin https://github.com/YOUR_USERNAME/titan-core.git
+git push -u origin main</code></pre>
+            <p style="font-size: 12px; color: var(--accent-cyan); margin-top: 6px;">
+              Then go to GitHub Repo → Settings → Pages → select "main" branch. Your app will be live at: <code>https://YOUR_USERNAME.github.io/titan-core/</code>
+            </p>
+          </div>
+
+          <div class="publish-card" style="margin-top: 14px;">
+            <h4>⚡ Option B: Vercel or Netlify (Drag & Drop in 10 Seconds)</h4>
+            <p style="font-size: 13px; color: var(--text-secondary);">
+              Go to <a href="https://app.netlify.com/drop" target="_blank" style="color: var(--accent-green);">app.netlify.com/drop</a> or <a href="https://vercel.com" target="_blank" style="color: var(--accent-green);">vercel.com</a> and simply drag and drop the <code>teen-core-strength-app</code> folder. You get an instant worldwide HTTPS link!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Standalone QR Code Library -->
+  <script src="qr-generator.js"></script>
+  <!-- Data & Application Engine -->
+  <script src="exercises-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
