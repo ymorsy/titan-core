@@ -44,6 +44,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
         return super().guess_type(path)
 
 def start_server():
+    global PORT
     os.chdir(DIRECTORY)
     local_ip = get_local_ip()
     local_url = f"http://localhost:{PORT}"
@@ -54,7 +55,6 @@ def start_server():
     try:
         httpd = socketserver.TCPServer(("", PORT), CustomHandler)
     except OSError:
-        global PORT
         PORT = 8081
         local_url = f"http://localhost:{PORT}"
         network_url = f"http://{local_ip}:{PORT}"
