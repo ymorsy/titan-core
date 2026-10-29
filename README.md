@@ -1,85 +1,89 @@
-# ⚡ TITAN CORE - 13yo Calisthenics & Six-Pack Academy
+# ⚡ TITAN CORE - Youth Calisthenics & Six-Pack Academy
 
-An interactive web application built specifically for a 13-year-old teen athlete to safely build real functional strength, widen the back into a V-taper, and sculpt defined six-pack abdominals using **only a pull-up bar and bodyweight**.
-
----
-
-## 🚀 How to Run the App
-
-### Option 1: Double-Click or Open in Any Browser
-Simply open [`index.html`](file:///Users/y.morsy/.gemini/antigravity/scratch/teen-core-strength-app/index.html) directly in Chrome, Safari, Edge, or Firefox on Mac, PC, iPad, or iPhone.
-
-### Option 2: Local Python Server (Recommended)
-Run the included python launcher:
-```bash
-python3 /Users/y.morsy/.gemini/antigravity/scratch/teen-core-strength-app/run_app.py
-```
-Then visit **`http://localhost:8080`** in your browser.
+An interactive, responsive Progressive Web App (PWA) designed for **13-year-old teen athletes and multiple users** to safely build functional core strength, widen the back into a V-taper, and sculpt defined abdominals using **only a pull-up bar and bodyweight floor work**.
 
 ---
 
-## 🎯 Key Features Built Into the App
+## 📱 How to Open on iPhone or iPad (Right Now on Home Wi-Fi)
 
-### 1. 📅 Clear Daily Exercise Plan (Monday – Sunday Split)
-- **Day 1 (Monday)**: V-Taper Pull & Six-Pack Foundation (Dead Hangs, Scapular Pulls, Negatives, Hollow Body Holds, Reverse Crunches)
-- **Day 2 (Tuesday)**: Push Power & Oblique Sculpt (Push-Ups, Plank Shoulder Taps, Side Plank Pulses, Cross Mountain Climbers, Deep Squats)
-- **Day 3 (Wednesday)**: Active Recovery & Spine Decompression (Spinal Waves, Cat-Cow, Relaxed Dead Hangs)
-- **Day 4 (Thursday)**: Hanging Core & Arm Forge (Chin-Ups, Hanging Knee Raises, Hanging Knee Twists, Bicycle Crunches)
-- **Day 5 (Friday)**: Full-Body Calisthenics & Core Armor (Pull-Ups, Push-Ups, Squats, Plank Shoulder Taps)
-- **Day 6 (Saturday)**: Six-Pack Shred & Explosive Core (Hollow Body Holds, Hanging Knee Raises, Bicycle Crunches, Mountain Climbers)
-- **Day 7 (Sunday)**: Rest, Nutrition & Mindset Check (Full recovery, sleep focus, weekly PR review)
-
-### 2. 📖 Complete Exercise Breakdown (Why, How & Muscles Targeted)
-Every single exercise contains:
-- **Target Muscles**: Distinct primary and secondary assist tags (Upper Abs, Lower Abs, Obliques, Transverse Abdominis, Lats, Biceps, Forearms, Shoulders).
-- **Why Do It**: Scientific benefits explaining how the movement creates muscle definition and functional athletic power.
-- **How To Do It**: Numbered step-by-step technique instructions with breathing cues.
-- **13yo Safety Cue**: Special guidance to protect developing growth plates, cervical neck, and lumbar spine.
-- **Regressions & Progressions**: What to do if an exercise is too hard (e.g. negative pull-ups, chair assists) or too easy (L-sit pull-ups).
-
-### 3. ⏱️ Interactive Guided Workout Mode (with Audio Chimes)
-- Click **"Start Guided Workout"** on any day.
-- A full-screen workout coach guides the user set-by-set with a circular animated timer.
-- Web Audio API synthesizer produces 3-2-1 countdown beeps, start buzzers, rest chimes, and victory fanfares.
-- Automatic rest intervals and form reminders.
-
-### 4. ⏰ Habit Tracker & Customizable Reminders
-- **Daily Checklist**:
-  - 🏋️ Today's Workout Complete
-  - 💧 Hydration (6-8 cups / 2L water)
-  - 🍳 Power Fuel & Protein (Eggs, milk, chicken, lentils)
-  - 🌙 8 to 9 Hours of Sleep (Human Growth Hormone release)
-  - 🧍 Spine & Posture Check (Dead hang after school)
-- **Notification Reminder**: Configurable daily reminder time (default 4:30 PM after school) with browser notifications and in-app sound alert.
-
-### 5. 📊 Visual Progress Plan & Personal Records (PRs)
-- **Streak Counter**: Consecutive active days with fire streak badge (`🔥`).
-- **Athlete Rank System**:
-  - Level 1: *Iron Recruit* (0 XP)
-  - Level 2: *Core Cadet* (150 XP)
-  - Level 3: *Bar Warrior* (350 XP)
-  - Level 4: *Six-Pack Striker* (650 XP)
-  - Level 5: *Apex Titan* (1100 XP)
-- **PR Tracker**: Max pull-ups/negatives, max plank hold, and max dead hang duration with instant save and backup export.
-
-### 6. 🧬 Interactive Anatomical Muscle Map
-- Interactive SVG muscle diagram highlighting Abs (Upper & Lower), Obliques, Deep Core, Lats, Shoulders, Chest, Biceps, and Legs.
-- Clicking any muscle instantly highlights it and filters the exercises that build it!
-
-### 7. 🛡️ 13-Year-Old Safety & Nutrition Guide
-- Why teens should **never** starve or do extreme cuts.
-- Why pull-up bar hangs are the gold standard for posture and spine decompression.
-- The step-by-step roadmap to go from 0 pull-ups to 10 strict pull-ups.
+1. Run the local server on your Mac:
+   ```bash
+   python3 /Users/y.morsy/.gemini/antigravity/scratch/teen-core-strength-app/run_app.py
+   ```
+2. Your terminal will display your local network address (e.g., `http://192.168.68.66:8080`).
+3. **On your iPhone or iPad**:
+   - Make sure your device is connected to the same Wi-Fi network.
+   - Open **Safari** and go to `http://192.168.68.66:8080` (or simply click **"📲 Mobile / Publish"** on your Mac and scan the on-screen QR code with your iPhone camera!).
+   - Tap Safari's **Share** button (📤) and select **"Add to Home Screen"** (➕).
+   - The app installs directly onto your home screen with its own custom athletic icon, launching full-screen just like a native iOS app!
 
 ---
 
-## 📁 File Structure
+## 👥 Multi-User Athlete Profiles
+
+You can now track multiple kids, siblings, or parents independently on the same device or shared family iPad:
+- **Switch Athlete in 1 Tap**: Tap the athlete pill in the top header (or the "Athletes" button on the mobile bottom bar).
+- **Independent Athlete Tracking**:
+  - Personal Day Streak (`🔥`)
+  - Workout History & Completed Days
+  - Daily Habit Checklists (Water, Sleep, Fuel, Posture)
+  - XP & Rank Level (Iron Recruit → Apex Titan)
+  - Personal Records (PRs: Pull-Ups, Plank hold, Dead Hang)
+  - Custom Workout Reminder Times
+- **Add New Athletes**: Enter Name, Age, and pick from 12 fun emoji avatars (`⚡`, `🦁`, `🥊`, `🥋`, `🏆`, `🔥`, `🦅`, `🚀`, etc.).
+- **Data Safety**: All profiles are saved locally in the browser with full JSON export backup.
+
+---
+
+## 📐 Responsive Design for All Screen Sizes
+
+- **iPhone (All Models: SE, 11, 12, 13, 14, 15, 16 Pro Max)**:
+  - **Ergonomic Bottom Navigation Bar**: Fixed at the bottom for comfortable thumb reachability (`📅 Plan`, `📊 Progress`, `✅ Habits`, `🧬 Muscles`, `👤 Athletes`).
+  - **iOS Safe Area Insets**: Respects the iPhone notch, Dynamic Island, and home indicator bar.
+  - **Horizontal Touch-Swipe Day Track**: Swipe through Monday–Sunday seamlessly without cluttering vertical space.
+  - **Full-Screen Workout Mode**: Big circular timer, 48px+ touch buttons, and haptic-style visual and audio countdown cues.
+- **iPad (Portrait & Landscape)**:
+  - Takes full advantage of tablet screen width.
+  - Side-by-side interactive Anatomical Body Map and exercise library so users can tap muscles and see corresponding pull-up bar exercises simultaneously.
+- **Desktop & Mac**:
+  - Full widescreen dashboard layout with top navigation.
+
+---
+
+## 🌐 How to Publish Online for Free
+
+### Option 1: GitHub Pages (Free Forever, Custom URL)
+1. Initialize a repository on GitHub (e.g. `titan-core`).
+2. Run in terminal:
+   ```bash
+   cd /Users/y.morsy/.gemini/antigravity/scratch/teen-core-strength-app
+   git remote add origin https://github.com/YOUR_USERNAME/titan-core.git
+   git push -u origin main
+   ```
+3. In your GitHub repository: go to **Settings → Pages → Source: Deploy from a branch (main)**.
+4. Your app is now live worldwide at: `https://YOUR_USERNAME.github.io/titan-core/`!
+
+### Option 2: Netlify / Vercel (Instant Drag & Drop)
+1. Visit [app.netlify.com/drop](https://app.netlify.com/drop) or [vercel.com](https://vercel.com).
+2. Drag and drop the `teen-core-strength-app` folder.
+3. You will get an instant public HTTPS link with free CDN hosting.
+
+---
+
+## 🛠️ File Structure
 ```
 teen-core-strength-app/
-├── index.html            # Main UI, tabs, interactive muscle map, and workout modal
-├── style.css             # High-contrast athletic dark mode styling & animations
-├── app.js                # Core app engine, timer logic, sound generator, and state
-├── exercises-data.js     # Full database of 14 exercises, 7-day plan, and progression ranks
-├── run_app.py            # Local python server runner script
+├── index.html            # Main UI, responsive tabs, SVG muscle map, and modals
+├── style.css             # Responsive athletic styling (iPhone safe areas, bottom bar, iPad layout)
+├── app.js                # Multi-profile engine, workout timer, sound synthesis, PWA registration
+├── qr-generator.js       # Zero-dependency QR Code generator for instant iPhone/iPad camera scan
+├── exercises-data.js     # Youth calisthenics database (14 exercises & 7-day plan)
+├── generate_icons.py     # Pure Python PNG icon generator for PWA
+├── icon-192.png          # PWA App Icon (192x192)
+├── icon-512.png          # PWA App Icon (512x512)
+├── apple-touch-icon.png  # iOS Home Screen App Icon
+├── manifest.json         # Web App Manifest for native iOS & Android install
+├── sw.js                 # Service Worker for offline performance
+├── run_app.py            # Local Python server launcher with Wi-Fi IP discovery
 └── README.md             # Documentation and usage guide
 ```
